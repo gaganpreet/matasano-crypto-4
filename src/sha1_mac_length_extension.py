@@ -1,7 +1,7 @@
 import sha1_mac
-import sha1
 import struct
 from binascii import unhexlify
+from impl import sha1
 
 def get_glue_padding(byte_len):
     ''' Get glue padding string used for sha1 hash

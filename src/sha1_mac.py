@@ -1,5 +1,5 @@
-import sha1
 import util
+from impl import sha1
 
 class MAC:
     ''' SHA1 based MAC generator '''
