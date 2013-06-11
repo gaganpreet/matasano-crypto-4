@@ -5,26 +5,30 @@ import struct
 def _left_rotate(n, b):
     return ((n << b) | (n >> (32 - b))) & 0xffffffff
     
-def sha1(message):
+def sha1(message, init=None, original_len=0):
     """SHA-1 Hashing Function
 
     A custom SHA-1 hashing function implemented entirely in Python.
 
     Arguments:
         message: The input message string to hash.
+        init: Initialize init variables with a different set (for length based extension attacks)
 
     Returns:
         A hex SHA-1 digest of the input message.
     """
     # Initialize variables:
-    h0 = 0x67452301
-    h1 = 0xEFCDAB89
-    h2 = 0x98BADCFE
-    h3 = 0x10325476
-    h4 = 0xC3D2E1F0
+    if init:
+        h0, h1, h2, h3, h4 = init
+    else:
+        h0 = 0x67452301
+        h1 = 0xEFCDAB89
+        h2 = 0x98BADCFE
+        h3 = 0x10325476
+        h4 = 0xC3D2E1F0
     
     # Pre-processing:
-    original_byte_len = len(message)
+    original_byte_len = len(message) + original_len
     original_bit_len = original_byte_len * 8
     # append the bit '1' to the message
     message += '\x80'
