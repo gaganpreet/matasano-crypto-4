@@ -1,7 +1,7 @@
 import struct
 import util
 from binascii import unhexlify
-from md42 import md4
+from impl.md4 import md4
 
 MASK_32 = 2**32 - 1
 
