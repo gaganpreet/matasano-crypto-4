@@ -3,3 +3,6 @@
 27 - cbc_iv_is_key.py
 28 - sha1_mac.py
 29 - sha1_mac_length_extension.py
+30 - md4_mac_length_extension.py
+31 - hmac/server.py, hmac/time_attack.py
+32 - hmac/server.py 0.001, hmac/time_attack_v2.py
