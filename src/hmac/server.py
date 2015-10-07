@@ -8,6 +8,7 @@ except ImportError:
     sys.exit(0)
 
 sleep = 0.003
+
 def bad_compare(a, b):
     for i, j in zip(a, b):
         if i != j:
@@ -32,9 +33,9 @@ def hello():
 if __name__ == "__main__":
     if len(sys.argv) > 1:
         sleep = float(sys.argv[1])
-        print('----------->Using %f for sleep interval'%sleep)
+        print('----------->Using %f for sleep interval' % sleep)
     else:
-        print('----------->Using default value %f for sleep interval (anything less than this is the value it breaks for me)'%sleep)
+        print('----------->Using default value %f for sleep interval (anything less than this is the value it breaks for me)' % sleep)
 
     app.debug = True
     app.run()

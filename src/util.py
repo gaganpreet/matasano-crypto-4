@@ -3,7 +3,6 @@
 import random
 from Crypto.Cipher import AES
 import struct
-from base64 import b64decode
 
 ''' Some util functions '''
 
@@ -13,7 +12,7 @@ def get_blocks(text, block_size):
 
 def string_xor(x, y):
     ''' Xor two equal length strings character by character '''
-    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x,y)])
+    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x, y)])
 
 def random_string(length):
     ''' Generate a random string of length l'''
@@ -77,7 +76,7 @@ def ctr_cipher(text, key, nonce=0):
     processed = ''
     c = Counter()
     for block in blocks:
-        keystring = ecb_encrypt(c.next(), key) 
+        keystring = ecb_encrypt(c.next(), key)
         processed += string_xor(keystring, block)
 
     return processed
@@ -96,13 +95,13 @@ def pkcs_pad(string, block_size):
     pad_length = 0
     if len(string) % block_size > 0:
         pad_length = block_size - (len(string) % block_size)
-    
+
     pad = chr(pad_length)
     return string + pad_length * pad
 
 def is_valid_padding(string):
     ''' Test for validity of PKCS 7 padding on a string '''
     last = string[-1]
-    if last * ord(last) == string[-ord(last):]: 
+    if last * ord(last) == string[-ord(last):]:
         return True
     return False

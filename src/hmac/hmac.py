@@ -2,7 +2,7 @@ from hashlib import sha1
 
 def string_xor(x, y):
     ''' Xor two equal length strings character by character '''
-    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x,y)])
+    return ''.join([chr(ord(a) ^ ord(b)) for a, b in zip(x, y)])
 
 def hmac(key, message):
     ''' SHA1 HMAC
@@ -10,7 +10,7 @@ def hmac(key, message):
             key -> Key to use
             message -> Message to generate auth hash for
     '''
-    blocksize = 64 # Block size of SHA1
+    blocksize = 64  # Block size of SHA1
 
     # Keys > blocksize are shortened
     if len(key) > blocksize:

@@ -3,7 +3,7 @@ import urllib
 
 class RandomCTR():
     def __init__(self):
-        self.key = util.random_string(16) 
+        self.key = util.random_string(16)
 
     def encrypt(self, text):
         prepend = 'comment1=cooking%20MCs;userdata='
@@ -33,7 +33,7 @@ if __name__ == '__main__':
     to_insert = '3admin-true'
 
     encrypted = ctr.encrypt(to_insert)
-    print 'String is compromised: %s'%(is_compromised(ctr.decrypt(encrypted)))
+    print 'String is compromised: %s' % (is_compromised(ctr.decrypt(encrypted)))
 
     ''' I found the characters 3 and - to modify manually, using this:
            for i in xrange(255):
@@ -47,4 +47,4 @@ if __name__ == '__main__':
     encrypted = modify_bit_string(encrypted, 32, 3)
     encrypted = modify_bit_string(encrypted, 38, 4)
 
-    print 'String is compromised: %s'%(is_compromised(ctr.decrypt(encrypted)))
+    print 'String is compromised: %s' % (is_compromised(ctr.decrypt(encrypted)))

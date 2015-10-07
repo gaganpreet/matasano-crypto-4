@@ -25,12 +25,12 @@ def get_glue_padding(byte_len):
 
     glue_padding = '\x80'
     glue_padding += '\x00' * ((56 - (byte_len + 1) % 64) % 64)
-    glue_padding +=  struct.pack("<2I", bit_len & MASK_32, (bit_len>>32) & MASK_32)
+    glue_padding += struct.pack("<2I", bit_len & MASK_32, (bit_len >> 32) & MASK_32)
 
     return glue_padding
 
 def extend_message(message, extension, init, key_len):
-    ''' Length based extension attack on a md4 keyed authentication code 
+    ''' Length based extension attack on a md4 keyed authentication code
         Arguments:
             message: Original message
             extension: Message to append
@@ -45,7 +45,7 @@ def extend_message(message, extension, init, key_len):
     new_message = message + glue_padding + extension
 
     new_hash = md4(extension, init, original_len).hexdigest()
-    
+
     return (new_message, new_hash)
 
 if __name__ == '__main__':
@@ -62,14 +62,13 @@ if __name__ == '__main__':
     for i in xrange(40):
         print 'Trying key_len', i, 
         try:
-            new_message, new_hash = extend_message(message, extension, init, i) 
+            new_message, new_hash = extend_message(message, extension, init, i)
         except struct.error:
             continue
         if mac.verify(new_message, new_hash):
             print
-            print 'Original key length: %s'%i
-            print 'New messsage: %s,\nNew hash: %s'%(repr(new_message), new_hash)
+            print 'Original key length: %s' % i
+            print 'New messsage: %s,\nNew hash: %s' % (repr(new_message), new_hash)
             break
         else:
             print '- invalid'
-

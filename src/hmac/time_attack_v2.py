@@ -5,7 +5,7 @@ import string
 from collections import Counter
 
 def url_for(f, sig):
-    return 'http://localhost:5000/?file=%s&signature=%s'%(f, sig)
+    return 'http://localhost:5000/?file=%s&signature=%s' % (f, sig)
 
 def timedelta_ms(td):
     return td.microseconds + (td.seconds + td.days * 24 * 3600) * 10**6

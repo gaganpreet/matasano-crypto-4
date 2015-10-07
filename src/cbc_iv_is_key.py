@@ -7,10 +7,10 @@ class InvalidString(Exception):
 
 
 class AES():
-    def __init__(self): 
-        self.key = util.random_string(16) 
+    def __init__(self):
+        self.key = util.random_string(16)
         self.iv = self.key
-          
+
     def encrypt(self, text):
         ''' Encrypt text with AES 128 CBC with a chosen random key
         '''
@@ -18,13 +18,12 @@ class AES():
         append = ';comment2=%20like%20a%20pound%20of%20bacon'
 
         return util.cbc_encrypt(prepend + urllib.quote(text) + append, self.key, self.iv)
-    
+
     def decrypt(self, text):
-        ''' Decrypt text with AES 128 CBC with a chosen random key
-        ''' 
+        ''' Decrypt text with AES 128 CBC with a chosen random key'''
         s = util.cbc_decrypt(text, self.key, self.iv)
         if s.strip(string.printable):
-            raise InvalidString, s 
+            raise InvalidString(s)
         return s
 
 
@@ -35,9 +34,9 @@ def main():
     encrypted = aes.encrypt(text)
 
     blocks_encrypted = util.get_blocks(encrypted, 16)
-    blocks_encrypted[0] = blocks_encrypted [2] = blocks_encrypted[1]
+    blocks_encrypted[0] = blocks_encrypted[2] = blocks_encrypted[1]
     blocks_encrypted[1] = '\0' * 16
-    
+
     modified_encrypted = ''.join(blocks_encrypted)
 
     try:
